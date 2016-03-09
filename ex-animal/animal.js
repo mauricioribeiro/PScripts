@@ -11,29 +11,29 @@ function Gato(){
 	Animal.call(this, 'Miau');
 }
 
-function Manada(){
+function Manada(barulhos){
 	this.animais = [];
+	this.barulhos = barulhos;
 }
 
 function ManadaVirgula(){
-	this.barulhos = function(){
+	Manada.call(this, function(){
 		var retorno = '';
 		this.animais.forEach(function(animal){
 			retorno += animal.fazerBarulho() + ', '
 		});
 		return retorno.substr(0,retorno.length - 2);
-	}
+	});
 }
 
 function ManadaSustenido(){
-	this.barulhos = function(){
+	Manada.call(this, function(){
 		var retorno = '';
 		this.animais.forEach(function(animal){
 			retorno += animal.fazerBarulho() + '# ' + animal.fazerBarulho() + '# '
 		});
 		return retorno.substr(0,retorno.length - 2);
-	}
-	Manada.call(this);
+	});
 }
 
 // prototipos
