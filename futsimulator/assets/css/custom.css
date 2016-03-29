@@ -27,3 +27,7 @@ html, body{
 .gols{
 	font-weight: bold
 }
+.time-logo{
+	max-width: 40px;
+	max-height: 40px;
+}
