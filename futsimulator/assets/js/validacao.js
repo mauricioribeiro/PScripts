@@ -15,7 +15,7 @@ $(document).ready(function(){
 		'jogo2': $('#help-block-jogo2'),
 		'jogo3': $('#help-block-jogo3'),
 	};
-	var $formInputs = $formTime.find('input');
+	var $formInputs = $formTime.find('.campo');
 	var $tabelaTime = $('#tabela-time');
 	var id = 1;
 
@@ -70,6 +70,7 @@ $(document).ready(function(){
 			var $input = $(input);
 			time[$input.attr('name')] = $input.val();
 		});
+		console.log(time);
 
 		var erros = {};
 		var flagErro = false;
