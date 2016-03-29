@@ -70,7 +70,6 @@ $(document).ready(function(){
 			var $input = $(input);
 			time[$input.attr('name')] = $input.val();
 		});
-		console.log(time);
 
 		var erros = {};
 		var flagErro = false;
