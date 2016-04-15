@@ -45,7 +45,7 @@ $(document).ready(function(){
 		l += '<td>' + getJogoTexto(time.jogo2) + '</td>';
 		l += '<td>' + getJogoTexto(time.jogo3) + '</td>';
 		l += '<td>' + time.criacao + '</td>';
-		l += '<td><button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></<button></td>';
+		l += '<td><button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>';
 		l += '</tr>';
 
 		var $linhaDOM = $(l);
