@@ -1,0 +1,33 @@
+/* theme https://color.adobe.com/Bleh-color-theme-7644033/ */
+html, body{
+	background: #EFF3F7;
+}
+
+#header-bg{
+	background: url(../img/header-bg.jpg);
+}
+#header-bg * {
+	color: #fff;
+}
+#versus{
+	color: #C13838;
+    font-size: 120px;
+    font-weight: bold;
+}
+#partida{
+	margin: 50px auto;
+}
+#partida .time{
+	background: #fff;
+    padding: 10px 0 20px;
+    -webkit-border-radius: 10px;
+    -webkit-box-shadow: #6D6D6D 0px 1px 2px 0px;
+}
+
+.gols{
+	font-weight: bold
+}
+.time-logo{
+	max-width: 40px;
+	max-height: 40px;
+}

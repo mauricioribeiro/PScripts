@@ -1,0 +1,42 @@
+{% include "futsimulator/header.html" %}
+
+<div class="container">
+	<div id="times">
+		<div class="row text-center"></div>
+	</div>
+</div>
+
+<div class="container">
+
+	<div id="partida" class="row">
+
+		<div id="time-casa" data-id="" class="col-md-4 text-center time">
+			<h2>Casa</h2>
+			<h3 class="nome"><i>Aguardando time</i></h3>
+			<div class="emblema"></div>
+			<h1 class="gols">?</h1>
+			<button class="btn btn-danger remover-time" disabled> Remover <i class="fa fa-trash"></i></button>
+		</div>
+
+		<div class="col-md-4 text-center"><h1 id="versus">X</h1></div>
+
+		<div id="time-visitante" data-id="" class="col-md-4 text-center time">
+			<h2>Visitante</h2>
+			<h3 class="nome"><i>Aguardando time</i></h3>
+			<div class="emblema"></div>
+			<h1 class="gols">?</h1>
+			<button class="btn btn-danger remover-time" disabled> Remover <i class="fa fa-trash"></i></button>
+		</div>
+	</div>
+		
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<button id="simular" class="btn btn-primary btn-lg" disabled>Simular <i class="fa fa-check-circle"></i></button>
+		</div>
+	</div>
+</div>
+
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'futsimulator/js/index.js' %}"></script>
+
+{% include "futsimulator/footer.html" %}
