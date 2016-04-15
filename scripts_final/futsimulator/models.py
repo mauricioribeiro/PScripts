@@ -11,5 +11,7 @@ class Clube(models.Model):
 	nome = models.CharField(max_length = 100)
 	elenco = models.IntegerField(validators = VALIDACAO_PONTOS)
 	tradicao = models.IntegerField(validators = VALIDACAO_PONTOS)
-	ultimos_jogos = models.CharField(max_length = 2, choices = ULTIMOS_JOGOS, default = 1)
+	ultimo_jogo = models.IntegerField(choices = ULTIMOS_JOGOS, default = 1)
+	penultimo_jogo = models.IntegerField(choices = ULTIMOS_JOGOS, default = 1)
+	antepenultimo_jogo = models.IntegerField(choices = ULTIMOS_JOGOS, default = 1)
 	data_criado = models.DateTimeField('date published')
