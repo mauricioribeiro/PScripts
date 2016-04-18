@@ -3,14 +3,14 @@ $(document).ready(function(){
 	var $formTime = $('#form-time');
 	var groups = {
 		'nome': $('#form-group-nome'),
-		'img': $('#form-group-img'),
+		'escudo': $('#form-group-escudo'),
 		'jogo1': $('#form-group-jogo1'),
 		'jogo2': $('#form-group-jogo2'),
 		'jogo3': $('#form-group-jogo3'),
 	};
 	var helpBlocks = {
 		'nome': $('#help-block-nome'),
-		'img': $('#help-block-img'),
+		'escudo': $('#help-block-escudo'),
 		'jogo1': $('#help-block-jogo1'),
 		'jogo2': $('#help-block-jogo2'),
 		'jogo3': $('#help-block-jogo3'),
@@ -18,7 +18,6 @@ $(document).ready(function(){
 	var $formInputs = $formTime.find('.campo');
 	var $tabelaTime = $('#tabela-time');
 	var id = 1;
-
 
 	function mostrarErros(erros) {
 		for (var propriedade in erros) {
@@ -36,15 +35,27 @@ $(document).ready(function(){
 		}
 	}
 
+	function listarTimes(){
+		$.get('ajax/listar').success(function (times){
+			times.forEach(function(time){
+				mostrarTime(time);
+			});
+		});
+		/*.always(function () {
+			$fieldset.removeAttr('disabled');
+			$salvarLoader.fadeOut();
+		});*/
+	}
+
 	function mostrarTime(time) {
 		var l = '<tr>';
 		l += '<td>' + time.id + '</td>';
-		l += '<td><img src="' + time.img + '" class="time-logo"></td>';
+		l += '<td><img src="' + time.escudo + '" class="time-logo"></td>';
 		l += '<td>' + time.nome + '</td>';
 		l += '<td>' + getJogoTexto(time.jogo1) + '</td>';
 		l += '<td>' + getJogoTexto(time.jogo2) + '</td>';
 		l += '<td>' + getJogoTexto(time.jogo3) + '</td>';
-		l += '<td>' + time.criacao + '</td>';
+		l += '<td>' + time.data_criado + '</td>';
 		l += '<td><button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>';
 		l += '</tr>';
 
@@ -86,9 +97,11 @@ $(document).ready(function(){
 			$formTime[0].reset();
 			time.id = id;
 			id++;
-			time.criacao = 'dd/mm/aaaa hh:mm:ss';
+			time.data_criado = 'dd/mm/aaaa hh:mm:ss';
 			mostrarTime(time);
 		}
 	});
+
+	listarTimes();
 
 });

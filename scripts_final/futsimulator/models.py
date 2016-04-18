@@ -26,6 +26,7 @@ class Clube(models.Model):
 
 	def get_as_dict(self):
 		return dict(
+			id = self.id,
 			string_id = self.string_id,
 			nome = self.nome,
 			escudo = self.escudo,
