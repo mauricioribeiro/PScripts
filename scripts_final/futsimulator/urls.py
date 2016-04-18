@@ -20,5 +20,6 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^gerenciar', views.gerenciar, name='gerenciar'),
-    url(r'^ajax/listar', views.ajax_listar, name='ajax_listar'),
+    url(r'^ajax/listar/$', views.ajax_listar, name='ajax_listar'),
+    url(r'^ajax/listar/(?P<get_string_id>\w+)/$', views.ajax_listar_clube, name='ajax_listar_clube'),
 ]

@@ -27,6 +27,10 @@ def ajax_listar(request):
 	lista = [clube.get_as_dict() for clube in Clube.objects.all()]
 	return JsonResponse(lista, safe=False)
 
+def ajax_listar_clube(request, get_string_id):
+	clube = Clube.objects.get(string_id = get_string_id)
+	return JsonResponse(clube.get_as_dict(), safe=False)
+
 def ajax_cadastrar(request):
 	resetContext()
 
