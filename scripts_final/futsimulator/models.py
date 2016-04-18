@@ -20,3 +20,17 @@ class Clube(models.Model):
 
 	def __str__(self):
 		return self.nome
+
+	def get_ultimos_jogos(self):
+		return [self.antepenultimo_jogo, self.penultimo_jogo, self.ultimo_jogo]
+
+	def get_as_dict(self):
+		return dict(
+			string_id = self.string_id,
+			nome = self.nome,
+			escudo = self.escudo,
+			elenco = self.elenco,
+			tradicao = self.tradicao,
+			ultimos_jogos = self.get_ultimos_jogos(),
+			data_criado = self.data_criado
+		)
