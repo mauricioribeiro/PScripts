@@ -63,7 +63,7 @@ $(document).ready(function(){
 		$linhaDOM.find('.btn-danger').click(function () {
 			$linhaDOM.remove();
 		});
-		$tabelaTime.append($linhaDOM);
+		$tabelaTime.prepend($linhaDOM);
 	}
 
 	function getJogoTexto(jogo){
