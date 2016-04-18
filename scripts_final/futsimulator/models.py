@@ -24,6 +24,9 @@ class Clube(models.Model):
 	def get_ultimos_jogos(self):
 		return [self.antepenultimo_jogo, self.penultimo_jogo, self.ultimo_jogo]
 
+	def get_data_criado(self):
+		return self.data_criado.strftime("%d/%m/%Y %H:%M:%S")
+
 	def get_as_dict(self):
 		return dict(
 			id = self.id,
@@ -33,5 +36,5 @@ class Clube(models.Model):
 			elenco = self.elenco,
 			tradicao = self.tradicao,
 			ultimos_jogos = self.get_ultimos_jogos(),
-			data_criado = self.data_criado
+			data_criado = self.get_data_criado()
 		)
