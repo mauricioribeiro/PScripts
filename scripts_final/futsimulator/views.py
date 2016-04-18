@@ -18,10 +18,10 @@ def index(request):
 	context['page_title'] = 'Simular Partida';
 	return render(request, 'futsimulator/index.html', context)
 
-def cadastrar(request):
+def gerenciar(request):
 	resetContext()
-	context['page_title'] = 'Cadastrar Time';
-	return render(request, 'futsimulator/cadastrar.html', context)
+	context['page_title'] = 'Gerenciar Times';
+	return render(request, 'futsimulator/gerenciar.html', context)
 
 def ajax_listar(request):
 	lista = [clube.get_as_dict() for clube in Clube.objects.all()]
