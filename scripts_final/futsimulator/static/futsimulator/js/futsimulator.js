@@ -7,6 +7,7 @@ var FutSimulator = {
 	CONST_E : 0,
 	CONST_PESO_CASA : 3,
 
+	// /static/futsimulator/img/.png
 	times : {
 		"atletico_mineiro" : { nome: "C. Atlético Mineiro", elenco : 8, tradicao : 9, ultimos_jogos : [0, 1, 1] },
 		"atletico_paranaense" : { nome: "C. Atlético Paranaense", elenco : 6, tradicao : 8, ultimos_jogos : [1, 0, 0] },
