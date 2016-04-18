@@ -2,15 +2,21 @@ $(document).ready(function(){
 
 	var $formTime = $('#form-time');
 	var groups = {
+		'string_id': $('#form-group-string_id'),
 		'nome': $('#form-group-nome'),
+		'elenco': $('#form-group-elenco'),
+		'tradicao': $('#form-group-tradicao'),
 		'escudo': $('#form-group-escudo'),
 		'jogo1': $('#form-group-jogo1'),
 		'jogo2': $('#form-group-jogo2'),
 		'jogo3': $('#form-group-jogo3'),
 	};
 	var helpBlocks = {
+		'string_id': $('#help-block-string_id'),
 		'nome': $('#help-block-nome'),
 		'escudo': $('#help-block-escudo'),
+		'elenco': $('#help-block-elenco'),
+		'tradicao': $('#help-block-tradicao'),
 		'jogo1': $('#help-block-jogo1'),
 		'jogo2': $('#help-block-jogo2'),
 		'jogo3': $('#help-block-jogo3'),

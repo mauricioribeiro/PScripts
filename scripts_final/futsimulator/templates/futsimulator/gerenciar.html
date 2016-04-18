@@ -5,6 +5,12 @@
 	<div class="row">
 		<form id="form-time" action="#">
 
+			<div id="form-group-string_id" class="form-group">
+				<label class="control-label">Prefixo </label>
+				<input id="string_id-input" type="text" class="campo form-control" name="string_id" value="">
+				<span id="help-block-string_id" class="help-block"></span>
+			</div>
+
 			<div id="form-group-nome" class="form-group">
 				<label class="control-label">Nome </label>
 				<input id="nome-input" type="text" class="campo form-control" name="nome" value="">
@@ -18,9 +24,25 @@
 			</div>
 			<!-- https://images4.tcdn.com.br/img/img_prod/311840/categoria_img_351_20150706172904.png -->
 
-			<div class="form-inline col-md-4">
+			<div class="form-inline col-md-2 col-md-offset-1">
+				<div id="form-group-elenco" class="form-group">
+					<label>Nota Elenco</label>
+					<input id="elenco-input" type="number" class="campo form-control" name="elenco" value="" min="0" max="10">
+					<span id="help-block-elenco" class="help-block"></span>
+				</div>
+			</div>
+
+			<div class="form-inline col-md-2">
+				<div id="form-group-tradicao" class="form-group">
+					<label>Nota Tradição</label>
+					<input id="tradicao-input" type="number" class="campo form-control" name="tradicao" value="" min="0" max="10">
+					<span id="help-block-tradicao" class="help-block"></span>
+				</div>
+			</div>
+
+			<div class="form-inline col-md-2">
 				<div id="form-group-jogo1" class="form-group">
-					<label>Resultado anti penúltimo jogo</label>
+					<label>Ante penúltimo jogo</label>
 					<select id="jogo1-input" class="campo form-control" name="jogo1">
 						<option value="">---</option>
 						<option value="-1">Derrota</option>
@@ -31,9 +53,9 @@
 				</div>
 			</div>
 
-			<div id="form-group-jogo2" class="form-inline col-md-4">
+			<div id="form-group-jogo2" class="form-inline col-md-2">
 				<div class="form-group">
-					<label>Resultado penúltimo jogo</label>
+					<label>Penúltimo jogo</label>
 					<select id="jogo2-input" class="campo form-control" name="jogo2">
 						<option value="">---</option>
 						<option value="-1">Derrota</option>
@@ -44,9 +66,9 @@
 				</div>
 			</div>
 
-			<div id="form-group-jogo3" class="form-inline col-md-4">
+			<div id="form-group-jogo3" class="form-inline col-md-2">
 				<div class="form-group">
-					<label>Resultado último jogo</label>
+					<label>Último jogo</label>
 					<select id="jogo3-input" class="campo form-control" name="jogo3">
 						<option value="">---</option>
 						<option value="-1">Derrota</option>

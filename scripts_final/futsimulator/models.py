@@ -25,7 +25,7 @@ class Clube(models.Model):
 		return [self.antepenultimo_jogo, self.penultimo_jogo, self.ultimo_jogo]
 
 	def get_data_criado(self):
-		return self.data_criado.strftime("%d/%m/%Y %H:%M:%S")
+		return self.data_criado.strftime("%d/%m/%Y %H:%M:%S") if self.data_criado is not None else None
 
 	def get_as_dict(self):
 		return dict(
