@@ -129,4 +129,10 @@ var FutSimulator = function(){
 		return Math.floor(Math.random() * (this.CONST_MAX - this.CONST_MIN) + this.CONST_MIN);
 	}
 
+	this.popularDiv = function(elemento_jquery){
+		this.times.forEach(function(time){
+			elemento_jquery.append('<div class="col-md-1"><a class="carregar-time" data-id="' + time.string_id + '" href="javascript:void(0);"><img src="'+ time.escudo +'" title="' + time.nome + '"></a></div>');
+		});
+	}
+
 }
