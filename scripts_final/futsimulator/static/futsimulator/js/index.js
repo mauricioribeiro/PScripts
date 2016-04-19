@@ -1,9 +1,15 @@
 $(document).ready(function(){
 
-	for (var id_time in FutSimulator.times) {
-		var time = FutSimulator.times[id_time];
-		$('#times > .row').append('<div class="col-md-1"><a class="carregar-time" data-id="' + id_time + '" href="javascript:void(0);"><img src="'+ STATIC_PATH + '/img/' + id_time + '.png" title="' + time.nome + '"></a></div>');
+
+	futsimulatorApp = new FutSimulator();
+	
+	FutSimulator.prototype.populateDiv = function(){
+		this.times.forEach(function(time){
+			$('#times > .row').append('<div class="col-md-1"><a class="carregar-time" data-id="' + time.string_id + '" href="javascript:void(0);"><img src="'+ time.escudo +'" title="' + time.nome + '"></a></div>');
+		});
 	}
+	futsimulatorApp.init();
+	futsimulatorApp.populateDiv();
 
 	$('.carregar-time').click(function(){
 
@@ -24,7 +30,7 @@ $(document).ready(function(){
 
 	$('#simular').click(function(){
 
-		var resultado = FutSimulator.simular($('#time-casa').attr('data-id'), $('#time-visitante').attr('data-id'));
+		var resultado = futsimulatorApp.simular($('#time-casa').attr('data-id'), $('#time-visitante').attr('data-id'));
 
 		$('#time-casa .gols').html(resultado.info_time_casa.gols);
 		$('#time-visitante .gols').html(resultado.info_time_visitante.gols);
@@ -33,21 +39,22 @@ $(document).ready(function(){
 
 	});
 
+	function carregar_time(id_time,id_div){
+		var time = futsimulatorApp.get_time(id_time);
+		$('#' + id_div).attr('data-id', time.string_id);
+		$('#' + id_div + ' .nome').html(time.nome);
+		$('#' + id_div + ' .gols').html('?');
+		$('#' + id_div + ' .emblema').html('<img src="'+ time.escudo+ '">');
+		$('#' + id_div + ' .remover-time').removeAttr('disabled');
+	}
+
+	function remover_time(id_div){
+		$('#' + id_div).attr('data-id', '');
+		$('#' + id_div + ' .nome').html('<i>Aguardando time</i>');
+		$('#' + id_div + ' .gols').html('?');
+		$('#' + id_div + ' .emblema').html('');
+		$('#' + id_div + ' .remover-time').attr('disabled','disabled');
+		$('#simular').attr('disabled','disabled');
+	}
+
 });
-
-function carregar_time(id_time,id_div){
-	$('#' + id_div).attr('data-id', id_time);
-	$('#' + id_div + ' .nome').html(FutSimulator.times[id_time].nome);
-	$('#' + id_div + ' .gols').html('?');
-	$('#' + id_div + ' .emblema').html('<img src="'+STATIC_PATH+'/img/' + id_time + '.png">');
-	$('#' + id_div + ' .remover-time').removeAttr('disabled');
-}
-
-function remover_time(id_div){
-	$('#' + id_div).attr('data-id', '');
-	$('#' + id_div + ' .nome').html('<i>Aguardando time</i>');
-	$('#' + id_div + ' .gols').html('?');
-	$('#' + id_div + ' .emblema').html('');
-	$('#' + id_div + ' .remover-time').attr('disabled','disabled');
-	$('#simular').attr('disabled','disabled');
-}

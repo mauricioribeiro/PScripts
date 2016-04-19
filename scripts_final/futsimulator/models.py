@@ -35,6 +35,9 @@ class Clube(models.Model):
 			escudo = self.escudo,
 			elenco = self.elenco,
 			tradicao = self.tradicao,
+			antepenultimo_jogo = self.antepenultimo_jogo,
+			penultimo_jogo = self.penultimo_jogo,
+			ultimo_jogo = self.ultimo_jogo,
 			ultimos_jogos = self.get_ultimos_jogos(),
 			data_criado = self.get_data_criado()
 		)

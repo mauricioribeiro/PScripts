@@ -1,13 +1,13 @@
-var FutSimulator = {
+var FutSimulator = function(){
 
-	CONST_MIN : 0,
-	CONST_MAX : 5,
-	CONST_V : 1, 
-	CONST_D : -1,
-	CONST_E : 0,
-	CONST_PESO_CASA : 3,
+	this.CONST_MIN = 0;
+	this.CONST_MAX = 5;
+	this.CONST_V = 1;
+	this.CONST_D = -1;
+	this.CONST_E = 0;
+	this.CONST_PESO_CASA = 3;
 
-	// /static/futsimulator/img/.png
+	/*// /static/futsimulator/img/.png
 	times : {
 		"atletico_mineiro" : { nome: "C. Atlético Mineiro", elenco : 8, tradicao : 9, ultimos_jogos : [0, 1, 1] },
 		"atletico_paranaense" : { nome: "C. Atlético Paranaense", elenco : 6, tradicao : 8, ultimos_jogos : [1, 0, 0] },
@@ -28,13 +28,35 @@ var FutSimulator = {
 		//"figuerense" : { nome: "Figuerense F.C.", elenco : 0.5, tradicao : 0.5, ultimos_jogos : [-1, -1, -1] },
 		//"fluminense" : { nome: "Fluminense F.C.", elenco : 0.7, tradicao : 0.8, ultimos_jogos : [1, 1, -1] },
 		//"goias" : { nome: "Goiás E.C.", elenco : 0.5, tradicao : 0.6, ultimos_jogos : [-1, 0, 1] },
-	},
+	}, */
 
-	get_time : function(id_time){
-		return (typeof this.times[id_time] !== 'undefined') ? this.times[id_time] : false;
-	},
+	this.times = [];
 
-	get_pontuacao : function(id_time){
+	this.init = function(){
+		$.ajax({
+			url : 'ajax/listar',
+			context : this,
+		}).success(function (times_cadastrados){
+			for(var i = 0; i < times_cadastrados.length; i++){
+				this.times.push(times_cadastrados[i]);
+			}
+		});
+	}
+
+	this.get_time = function(id_time){
+		// return (typeof this.times[id_time] !== 'undefined') ? this.times[id_time] : false;
+		for(var i = 0; i < times.length; i++){
+			if(times[i].string_id == id_time){
+				return times[i];
+			}
+		}
+	}
+
+	this.get_times = function(){
+		return times;
+	}
+
+	this.get_pontuacao = function(id_time){
 
 		var time = this.get_time(id_time);
 		var pontuacao = 3;
@@ -46,9 +68,9 @@ var FutSimulator = {
 		}
 
 		return pontuacao + time.elenco + time.tradicao;
-	},
+	}
 
-	simular : function(id_time_casa, id_time_visitante){
+	this.simular = function(id_time_casa, id_time_visitante){
 
 		var time_casa = this.get_time(id_time_casa);
 		var time_visitante = this.get_time(id_time_visitante);
@@ -76,9 +98,9 @@ var FutSimulator = {
 		}
 
 		return false;
-	},
+	}
 
-	salvar_jogo : function(id_time_a, id_time_b, gols_time_a, gols_time_b){
+	this.salvar_jogo = function(id_time_a, id_time_b, gols_time_a, gols_time_b){
 
 		var time_a = this.get_time(id_time_a);
 		var time_b = this.get_time(id_time_b);
@@ -101,9 +123,9 @@ var FutSimulator = {
 			time_b.ultimos_jogos.push(this.CONST_E);
 		}
 
-	},
+	}
 
-	chutar : function(){
+	this.chutar = function(){
 		return Math.floor(Math.random() * (this.CONST_MAX - this.CONST_MIN) + this.CONST_MIN);
 	}
 
