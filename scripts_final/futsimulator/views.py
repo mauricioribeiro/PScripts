@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils import timezone
 from django.core import serializers
+from django.views.decorators.csrf import csrf_protect
 
 from futsimulator.models import Clube
 
@@ -24,6 +25,7 @@ def gerenciar(request):
 	context['page_title'] = 'Gerenciar Times';
 	return render(request, 'futsimulator/gerenciar.html', context)
 
+@csrf_protect
 def ajax_cadastrar(request):
 	if request.method == 'POST':
 		try:
@@ -38,6 +40,7 @@ def ajax_cadastrar(request):
 				antepenultimo_jogo = request.POST['antepenultimo_jogo'],
 				data_criado = timezone.now()
 			)
+			clube.save()
 			return JsonResponse(clube.get_as_dict(), safe=False)
 		except:
 			raise Exception('POST inválido.')

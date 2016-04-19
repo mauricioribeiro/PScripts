@@ -7,9 +7,9 @@ $(document).ready(function(){
 		'elenco': $('#form-group-elenco'),
 		'tradicao': $('#form-group-tradicao'),
 		'escudo': $('#form-group-escudo'),
-		'jogo1': $('#form-group-jogo1'),
-		'jogo2': $('#form-group-jogo2'),
-		'jogo3': $('#form-group-jogo3'),
+		'antepenultimo_jogo': $('#form-group-antepenultimo_jogo'),
+		'penultimo_jogo': $('#form-group-penultimo_jogo'),
+		'ultimo_jogo': $('#form-group-ultimo_jogo'),
 	};
 	var helpBlocks = {
 		'string_id': $('#help-block-string_id'),
@@ -17,13 +17,31 @@ $(document).ready(function(){
 		'escudo': $('#help-block-escudo'),
 		'elenco': $('#help-block-elenco'),
 		'tradicao': $('#help-block-tradicao'),
-		'jogo1': $('#help-block-jogo1'),
-		'jogo2': $('#help-block-jogo2'),
-		'jogo3': $('#help-block-jogo3'),
+		'antepenultimo_jogo': $('#help-block-antepenultimo_jogo'),
+		'penultimo_jogo': $('#help-block-penultimo_jogo'),
+		'ultimo_jogo': $('#help-block-ultimo_jogo'),
 	};
 	var $formInputs = $formTime.find('.campo');
+	var $formFieldset = $formTime.find('fieldset');
+	var $formLoader = $('#loader');
 	var $tabelaTime = $('#tabela-time');
 	var id = 1;
+
+	function getCookie(name) {
+	    var cookieValue = null;
+	    if (document.cookie && document.cookie != '') {
+	        var cookies = document.cookie.split(';');
+	        for (var i = 0; i < cookies.length; i++) {
+	            var cookie = jQuery.trim(cookies[i]);
+	            // Does this cookie string begin with the name we want?
+	            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+	                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+	                break;
+	            }
+	        }
+	    }
+	    return cookieValue;
+	}
 
 	function mostrarErros(erros) {
 		for (var propriedade in erros) {
@@ -47,10 +65,6 @@ $(document).ready(function(){
 				mostrarTime(time);
 			});
 		});
-		/*.always(function () {
-			$fieldset.removeAttr('disabled');
-			$salvarLoader.fadeOut();
-		});*/
 	}
 
 	function mostrarTime(time) {
@@ -58,9 +72,9 @@ $(document).ready(function(){
 		l += '<td>' + time.id + '</td>';
 		l += '<td><img src="' + time.escudo + '" class="time-logo"></td>';
 		l += '<td>' + time.nome + '</td>';
-		l += '<td>' + getJogoTexto(time.jogo1) + '</td>';
-		l += '<td>' + getJogoTexto(time.jogo2) + '</td>';
-		l += '<td>' + getJogoTexto(time.jogo3) + '</td>';
+		l += '<td>' + getJogoTexto(time.antepenultimo_jogo) + '</td>';
+		l += '<td>' + getJogoTexto(time.penultimo_jogo) + '</td>';
+		l += '<td>' + getJogoTexto(time.ultimo_jogo) + '</td>';
 		l += '<td>' + time.data_criado + '</td>';
 		l += '<td><button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>';
 		l += '</tr>';
@@ -100,11 +114,25 @@ $(document).ready(function(){
 		if (flagErro) {
 			mostrarErros(erros);
 		} else {
-			$formTime[0].reset();
-			time.id = id;
-			id++;
-			time.data_criado = 'dd/mm/aaaa hh:mm:ss';
-			mostrarTime(time);
+			$.ajax({
+				url : 'ajax/cadastrar',
+				method : 'post',
+				data : time,
+				dataType : 'json',
+				headers : { "X-CSRFToken": getCookie("csrftoken") }
+			}).success(function (novo_time) {
+				$formTime[0].reset();
+				mostrarTime(novo_time);
+			}).error(function (resposta) {
+				mostrarErros(resposta.responseJSON);
+			}).always(function () {
+				$formFieldset.removeAttr('disabled');
+				$formLoader.fadeOut();
+			});
+
+			$formFieldset.attr('disabled', 'disabled');
+			$formLoader.fadeIn();
+
 		}
 	});
 
