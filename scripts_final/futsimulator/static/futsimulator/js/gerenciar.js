@@ -22,6 +22,7 @@ $(document).ready(function(){
 		'penultimo_jogo': $('#help-block-penultimo_jogo'),
 		'ultimo_jogo': $('#help-block-ultimo_jogo'),
 	};
+	var $idInput = $('#id-input');
 	var $formInputs = $formTime.find('.campo');
 	var $formFieldset = $formTime.find('fieldset');
 	var $formLoader = $('#loader');
@@ -77,10 +78,22 @@ $(document).ready(function(){
 		l += '<td>' + getJogoTexto(time.penultimo_jogo) + '</td>';
 		l += '<td>' + getJogoTexto(time.ultimo_jogo) + '</td>';
 		l += '<td>' + time.data_criado + '</td>';
+		l += '<td><button class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-pencil"></i></button></td>';
 		l += '<td><button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>';
 		l += '</tr>';
 
 		var $linhaDOM = $(l);
+
+		$linhaDOM.find('.btn-primary').click(function () {
+			$linhaDOM.remove();
+			$idInput.val(time.id);
+			$formInputs.each(function (i, input) {
+				var $input = $(input);
+				$input.val(time[$input.attr('name')]);
+			});
+			$formTime.slideDown();
+		});
+
 		$linhaDOM.find('.btn-danger').click(function () {
 			$linhaDOM.slideUp();
 			$.ajax({
@@ -105,6 +118,7 @@ $(document).ready(function(){
 	}
 
 	$toggleFormTime.click(function(){
+		$idInput.val('')
 		$formInputs.each(function (i, input) {
 			$(input).val('');
 		});
@@ -133,6 +147,9 @@ $(document).ready(function(){
 		if (flagErro) {
 			mostrarErros(erros);
 		} else {
+			if($idInput.val()){
+				$.extend(time, { 'id': $idInput.val() });
+			}
 			$.ajax({
 				url : 'ajax/cadastrar',
 				method : 'post',
@@ -151,6 +168,7 @@ $(document).ready(function(){
 
 			$formFieldset.attr('disabled', 'disabled');
 			$formLoader.fadeIn();
+			$formTime.slideUp();
 
 		}
 	});

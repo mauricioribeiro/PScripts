@@ -30,18 +30,33 @@ def gerenciar(request):
 def ajax_cadastrar(request):
 	if request.method == 'POST':
 		try:
-			clube = Clube(
-				string_id = request.POST['string_id'],
-				nome = request.POST['nome'],
-				escudo = request.POST['escudo'],
-				elenco = request.POST['elenco'],
-				tradicao = request.POST['tradicao'],
-				ultimo_jogo = request.POST['ultimo_jogo'],
-				penultimo_jogo = request.POST['penultimo_jogo'],
-				antepenultimo_jogo = request.POST['antepenultimo_jogo'],
-				data_criado = timezone.now()
-			)
-			clube.save()
+			if 'id' in request.POST and request.POST['id']:
+				try:
+					clube = Clube.objects.get(pk = int(request.POST['id']))
+					clube.string_id = request.POST['string_id']
+					clube.nome = request.POST['nome']
+					clube.escudo = request.POST['escudo']
+					clube.elenco = request.POST['elenco']
+					clube.tradicao = request.POST['tradicao']
+					clube.ultimo_jogo = request.POST['ultimo_jogo']
+					clube.penultimo_jogo = request.POST['penultimo_jogo']
+					clube.antepenultimo_jogo = request.POST['antepenultimo_jogo']
+					clube.save()
+				except Clube.DoesNotExist:
+					raise Exception('POST inválido')
+			else:
+				clube = Clube(
+					string_id = request.POST['string_id'],
+					nome = request.POST['nome'],
+					escudo = request.POST['escudo'],
+					elenco = request.POST['elenco'],
+					tradicao = request.POST['tradicao'],
+					ultimo_jogo = request.POST['ultimo_jogo'],
+					penultimo_jogo = request.POST['penultimo_jogo'],
+					antepenultimo_jogo = request.POST['antepenultimo_jogo'],
+					data_criado = timezone.now()
+				)
+				clube.save()
 			return JsonResponse(clube.get_as_dict(), safe=False)
 		except:
 			raise Exception('POST inválido.')
