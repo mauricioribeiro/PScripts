@@ -1,15 +1,11 @@
 $(document).ready(function(){
 
+	$divTimes = $('#times > .row');
 
-	futsimulatorApp = new FutSimulator();
-	
-	FutSimulator.prototype.populateDiv = function(){
-		this.times.forEach(function(time){
-			$('#times > .row').append('<div class="col-md-1"><a class="carregar-time" data-id="' + time.string_id + '" href="javascript:void(0);"><img src="'+ time.escudo +'" title="' + time.nome + '"></a></div>');
-		});
-	}
+	var futsimulatorApp = new FutSimulator();
 	futsimulatorApp.init();
-	futsimulatorApp.populateDiv();
+
+	console.log(futsimulatorApp.times);
 
 	$('.carregar-time').click(function(){
 

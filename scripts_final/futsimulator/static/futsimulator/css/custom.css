@@ -23,6 +23,9 @@ html, body{
     -webkit-border-radius: 10px;
     -webkit-box-shadow: #6D6D6D 0px 1px 2px 0px;
 }
+#times .col-md-1 {
+    margin: 10px 0;
+}
 
 .gols{
 	font-weight: bold

@@ -2,7 +2,11 @@
 
 <div class="container">
 	<div id="times">
-		<div class="row text-center"></div>
+		<div class="row text-center">
+			{% for clube in clubes_cadastrados %}
+				<div class="col-md-1"><a class="carregar-time" data-id="{{ clube.string_id }}" href="javascript:void(0);"><img src="{{ clube.escudo }}" title="{{ clube.nome }}"></a></div>
+			{% endfor %}
+		</div>
 	</div>
 </div>
 

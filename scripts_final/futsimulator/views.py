@@ -18,6 +18,7 @@ def resetContext():
 def index(request):
 	resetContext()
 	context['page_title'] = 'Simular Partida';
+	context['clubes_cadastrados'] = Clube.objects.all()
 	return render(request, 'futsimulator/index.html', context)
 
 def gerenciar(request):
@@ -45,8 +46,15 @@ def ajax_cadastrar(request):
 		except:
 			raise Exception('POST inválido.')
 
+@csrf_protect
 def ajax_deletar(request):
-	resetContext()
+	if request.method == 'POST':
+		try:
+			clube = Clube.objects.get(pk = request.POST['id'])
+			clube.delete()
+			return HttpResponse('deletado',context)
+		except:
+			raise Exception('POST inválido.')
 
 def ajax_editar(request):
 	resetContext()

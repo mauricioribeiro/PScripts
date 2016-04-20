@@ -81,7 +81,18 @@ $(document).ready(function(){
 
 		var $linhaDOM = $(l);
 		$linhaDOM.find('.btn-danger').click(function () {
-			$linhaDOM.remove();
+			$linhaDOM.slideUp();
+			$.ajax({
+				url : 'ajax/deletar',
+				method : 'post',
+				data : { 'id' : time.id },
+				headers : { "X-CSRFToken": getCookie("csrftoken") }
+			}).success(function () {
+				$linhaDOM.remove();
+			}).error(function () {
+				alert('Não foi possível apagar no momento');
+				$linhaDOM.slideDown();
+			});
 		});
 		$tabelaTime.prepend($linhaDOM);
 	}
