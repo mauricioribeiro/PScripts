@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	var $toggleFormTime = $('#toggle-form-time');
 	var $formTime = $('#form-time');
 	var groups = {
 		'string_id': $('#form-group-string_id'),
@@ -103,6 +104,13 @@ $(document).ready(function(){
 		return 'Empate';
 	}
 
+	$toggleFormTime.click(function(){
+		$formInputs.each(function (i, input) {
+			$(input).val('');
+		});
+		$formTime.slideToggle();
+	});
+
 	$formTime.submit(function (e) {
 		e.preventDefault();
 		limparErros();
@@ -147,6 +155,7 @@ $(document).ready(function(){
 		}
 	});
 
+	$formTime.hide();
 	listarTimes();
 
 });
