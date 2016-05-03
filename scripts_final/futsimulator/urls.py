@@ -19,9 +19,10 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^gerenciar', views.gerenciar, name='gerenciar'),
-    url(r'^ajax/listar/$', views.ajax_listar, name='ajax_listar'),
-    url(r'^ajax/listar/(?P<get_string_id>\w+)/$', views.ajax_listar_clube, name='ajax_listar_clube'),
-    url(r'^ajax/cadastrar', views.ajax_cadastrar, name='ajax_cadastrar'),
-    url(r'^ajax/deletar', views.ajax_deletar, name='ajax_deletar'),
+    url(r'^jquery/gerenciar', views.gerenciar_jquery, name='gerenciar_jquery'),
+    url(r'^angular/gerenciar', views.gerenciar_angular, name='gerenciar_angular'),
+    url(r'^api/listar/$', views.api_listar, name='api_listar'),
+    url(r'^api/listar/(?P<get_string_id>\w+)/$', views.api_listar_clube, name='api_listar_clube'),
+    url(r'^api/cadastrar', views.api_cadastrar, name='api_cadastrar'),
+    url(r'^api/deletar', views.api_deletar, name='api_deletar'),
 ]

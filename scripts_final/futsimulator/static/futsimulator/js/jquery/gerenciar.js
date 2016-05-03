@@ -62,7 +62,7 @@ $(document).ready(function(){
 	}
 
 	function listarTimes(){
-		$.get('ajax/listar').success(function (times){
+		$.get('/futsimulator/api/listar').success(function (times){
 			times.forEach(function(time){
 				mostrarTime(time);
 			});
@@ -97,7 +97,7 @@ $(document).ready(function(){
 		$linhaDOM.find('.btn-danger').click(function () {
 			$linhaDOM.slideUp();
 			$.ajax({
-				url : 'ajax/deletar',
+				url : '/futsimulator/api/deletar',
 				method : 'post',
 				data : { 'id' : time.id },
 				headers : { "X-CSRFToken": getCookie("csrftoken") }
@@ -151,7 +151,7 @@ $(document).ready(function(){
 				$.extend(time, { 'id': $idInput.val() });
 			}
 			$.ajax({
-				url : 'ajax/cadastrar',
+				url : '/futsimulator/api/cadastrar',
 				method : 'post',
 				data : time,
 				dataType : 'json',

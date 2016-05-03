@@ -21,13 +21,18 @@ def index(request):
 	context['clubes_cadastrados'] = Clube.objects.all()
 	return render(request, 'futsimulator/index.html', context)
 
-def gerenciar(request):
+def gerenciar_jquery(request):
 	resetContext()
-	context['page_title'] = 'Gerenciar Times';
-	return render(request, 'futsimulator/gerenciar.html', context)
+	context['page_title'] = 'Gerenciar Times | Crud Jquery';
+	return render(request, 'futsimulator/jquery/gerenciar.html', context)
+
+def gerenciar_angular(request):
+	resetContext()
+	context['page_title'] = 'Gerenciar Times | Crud Angular';
+	return render(request, 'futsimulator/angular/gerenciar.html', context)
 
 @csrf_protect
-def ajax_cadastrar(request):
+def api_cadastrar(request):
 	if request.method == 'POST':
 		try:
 			if 'id' in request.POST and request.POST['id']:
@@ -62,7 +67,7 @@ def ajax_cadastrar(request):
 			raise Exception('POST inválido.')
 
 @csrf_protect
-def ajax_deletar(request):
+def api_deletar(request):
 	if request.method == 'POST':
 		try:
 			clube = Clube.objects.get(pk = request.POST['id'])
@@ -71,14 +76,14 @@ def ajax_deletar(request):
 		except:
 			raise Exception('POST inválido.')
 
-def ajax_editar(request):
+def api_editar(request):
 	resetContext()
 
-def ajax_listar(request):
+def api_listar(request):
 	lista = [clube.get_as_dict() for clube in Clube.objects.all()]
 	return JsonResponse(lista, safe=False)
 
-def ajax_listar_clube(request, get_string_id):
+def api_listar_clube(request, get_string_id):
 	try:
 		clube = Clube.objects.get(string_id = get_string_id)
 		return JsonResponse(clube.get_as_dict(), safe=False)
