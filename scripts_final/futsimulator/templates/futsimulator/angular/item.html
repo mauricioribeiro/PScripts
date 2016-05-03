@@ -1,0 +1,16 @@
+<tr ng-show="visivel">
+    <td>
+        <button class="btn btn-success btn-sm">
+            <i class="glyphicon glyphicon-pencil"></i>
+        </button>
+    </td>
+    <td>{{ clube.id }}</td>
+    <td>{{ clube.creation }}</td>
+    <td>{{ clube.codigo }}</td>
+    <td>{{ clube.nome }}</td>
+    <td>
+        <button class="btn btn-danger btn-sm" ng-click="apagar()">
+            <i class="glyphicon glyphicon-trash"></i>
+        </button>
+    </td>
+</tr>
