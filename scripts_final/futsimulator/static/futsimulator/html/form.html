@@ -5,8 +5,8 @@
 		</div>
 	</div>
 
-	<div class="row" ng-show="formVisivelFlag">
-		<form id="form-time" action="#" style="margin: 20px 0" ng-submit="salvar()">
+	<div class="row" ng-show="formFlag">
+		<form id="form-clube" action="#" ng-submit="salvar()">
 			<fieldset>
 				<input id="id-input" name="id" type="hidden" value=""></input>
 				<div id="form-group-string_id" class="form-group" ng-class="{'has-error':erros.codigo}">
@@ -89,7 +89,7 @@
 					<button type="submit" class="btn btn-lg btn-success">Salvar</button>
 				</div>
 
-				<div id="loader" class="form-group text-center" style="display: none">
+				<div id="loader" class="form-group text-center" ng-show="loaderFlag">
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
 					<span class="sr-only">Aguarde...</span>
 				</div>

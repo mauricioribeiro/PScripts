@@ -3,7 +3,7 @@ var futsimulatorServices = angular.module('futsimulator-services', []);
 
 futsimulatorServices.factory('futsimulatorAPI', function ($rootScope) {
     var id = 1;
-    var delay = 1;
+    var delay = 2000;
 
     return {
         salvar: function (clube, sucessoCallback, erroCallback, alwaysCallback) {

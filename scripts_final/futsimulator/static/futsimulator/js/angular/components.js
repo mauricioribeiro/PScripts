@@ -9,13 +9,13 @@ futsimulatorComponents.directive('futsimulatorForm', function () {
         scope: { clubeSalvo: '&' },
 
         controller: function ($scope, futsimulatorAPI) {
-            $scope.clube = { nome: 'Notebook', codigo: 1};
-            $scope.formVisivelFlag = false;
-            $scope.salvandoFlag = false;
+            $scope.formFlag = false;
+            $scope.loaderFlag = false;
+            $scope.clube = {};
             $scope.erros = {};
 
             $scope.salvar = function () {
-                $scope.salvandoFlag = true;
+                $scope.loaderFlag = true;
                 $scope.erros = {};
                 futsimulatorAPI.salvar($scope.clube, function (clubeDoServidor) {
 
@@ -27,12 +27,12 @@ futsimulatorComponents.directive('futsimulatorForm', function () {
                 }, function (erros) {
                     $scope.erros = erros;
                 }, function () {
-                    $scope.salvandoFlag = false;
+                    $scope.loaderFlag = false;
                 });
             };
 
             $scope.alternarVisibilidade = function () {
-                $scope.formVisivelFlag = !$scope.formVisivelFlag;
+                $scope.formFlag = !$scope.formFlag;
             };
 
         }
