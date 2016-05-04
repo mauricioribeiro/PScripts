@@ -1,7 +1,7 @@
 
-var futsimulatorServico = angular.module('futsimulator-service', []);
+var futsimulatorServices = angular.module('futsimulator-services', []);
 
-futsimulatorServico.factory('FutSimulatorAPI', function ($rootScope) {
+futsimulatorServices.factory('futsimulatorAPI', function ($rootScope) {
     var id = 1;
     var delay = 1;
 

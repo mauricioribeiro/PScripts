@@ -1,11 +1,11 @@
 
-var fustimulatorApp = angular.module('futsimulatorApp', ['futsimulator-components', 'futsimulator-service']);
+var fustimulatorApp = angular.module('futsimulatorApp', ['futsimulator-components', 'futsimulator-services']);
 
-fustimulatorApp.controller('FutSimulatorCtrl',function ($scope, FutSimulatorApp) {
+fustimulatorApp.controller('futsimulatorCtrl',function ($scope, futsimulatorAPI) {
     
     $scope.clubes = [];
 
-    FutSimulatorApp.listar(function (clubeDoServidor) {
+    futsimulatorAPI.listar(function (clubeDoServidor) {
         $scope.clubes = clubeDoServidor;
     });
 

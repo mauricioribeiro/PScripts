@@ -1,29 +1,28 @@
 
-var futsimulatorComponentes = angular.module('futsimulator-components', ['futsimulator-service']);
+var futsimulatorComponents = angular.module('futsimulator-components', ['futsimulator-services']);
 
-futsimulatorComponentes.directive('futsimulatorForm', function () {
+futsimulatorComponents.directive('futsimulatorForm', function () {
     return {
         restrict: 'E',
-        templateUrl: '/futsimulator/templates/futsimulator/angular/form.html',
+        templateUrl: '/static/futsimulator/html/form.html',
         replace: true,
         scope: { clubeSalvo: '&' },
 
-        controller: function ($scope, FutSimulatorAPI) {
+        controller: function ($scope, futsimulatorAPI) {
             $scope.clube = { nome: 'Notebook', codigo: 1};
             $scope.formVisivelFlag = false;
             $scope.salvandoFlag = false;
             $scope.erros = {};
 
-
             $scope.salvar = function () {
                 $scope.salvandoFlag = true;
                 $scope.erros = {};
-                FutSimulatorAPI.salvar($scope.categoria, function (categoriaDoServidor) {
+                futsimulatorAPI.salvar($scope.clube, function (clubeDoServidor) {
 
                     $scope.clube = {nome: '', codigo: ''};
 
                     if ($scope.clubeSalvo !== undefined) {
-                        $scope.clubeSalvo({clube: categoriaDoServidor});
+                        $scope.clubeSalvo({clube: clubeDoServidor});
                     }
                 }, function (erros) {
                     $scope.erros = erros;
@@ -41,21 +40,21 @@ futsimulatorComponentes.directive('futsimulatorForm', function () {
 });
 
 
-futsimulatorComponentes.directive('clubeItem', function () {
+futsimulatorComponents.directive('futsimulatorItem', function () {
     return {
         restrict: 'A',
-        templateUrl: '/futsimulator/templates/futsimulator/angular/item.html',
+        templateUrl: '/static/futsimulator/html/item.html',
         replace: true,
         scope: {
             clube: '=',
             clubeApagado:'&'
         },
 
-        controller: function ($scope, FutSimulatorAPI) {
+        controller: function ($scope, futsimulatorAPI) {
             $scope.visivel = true;
             $scope.apagar = function () {
                 $scope.visivel = false;
-                FutSimulatorAPI.apagar($scope.clube.id, function () {
+                futsimulatorAPI.apagar($scope.clube.id, function () {
                     if($scope.clubeApagado!==undefined){
                         $scope.clubeApagado();
                     }
