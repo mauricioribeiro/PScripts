@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.utils import timezone
 from django.core import serializers
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 from futsimulator.models import Clube
 
@@ -31,9 +31,11 @@ def gerenciar_angular(request):
 	context['page_title'] = 'Gerenciar Times | Crud Angular';
 	return render(request, 'futsimulator/angular/gerenciar.html', context)
 
+#@csrf_exempt
 @csrf_protect
 def api_cadastrar(request):
 	if request.method == 'POST':
+		print('\n',request.POST,'\n')
 		try:
 			if 'id' in request.POST and request.POST['id']:
 				try:

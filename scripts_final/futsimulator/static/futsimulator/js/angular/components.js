@@ -29,8 +29,6 @@ futsimulatorComponents.directive('futsimulatorForm', function () {
                 $scope.loaderFlag = true;
                 $scope.erros = {};
 
-                console.log($scope.clube);
-
                 futsimulatorAPI.salvar($scope.clube, csrfCookie, function (clubeDoServidor) {
                     if ($scope.clubeSalvo !== undefined) {
                         $scope.clubeSalvo({clube: clubeDoServidor});

@@ -24,24 +24,39 @@ futsimulatorServices.factory('futsimulatorAPI', function ($http) {
             $http({
                 url : '/futsimulator/api/cadastrar', 
                 method : 'POST',
-                data : clube,
-                headers : { "X-CSRFToken": csrfToken },
+                data : $.param(clube),
+                headers : { 
+                    'Content-Type' : 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrfToken,
+                },
             }).then(function(resultado){
-                sucessoCallback(resultado.data);
+                var clubeResultado = resultado.config.data;
+                sucessoCallback(clubeResultado);
             }, erroCallback);
+
             if (alwaysCallback) { alwaysCallback(); }
         },
 
         listar: function (sucessoCallback, erroCallback, alwaysCallback) {
             $http.get('/futsimulator/api/listar').then(function(resultado){
-                var clubes = resultado.data;
-                sucessoCallback(clubes);
+                var clubesResultado = resultado.data;
+                sucessoCallback(clubesResultado);
             });
+
             if (alwaysCallback) { alwaysCallback(); }
         },
 
         apagar: function (id, csrfToken, sucessoCallback, erroCallback, alwaysCallback) {
-            sucessoCallback();
+            $http({
+                url : '/futsimulator/api/deletar', 
+                method : 'POST',
+                data : $.param({'id': id }),
+                headers : { 
+                    'Content-Type' : 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrfToken,
+                },
+            }).then(sucessoCallback, erroCallback);
+
             if (alwaysCallback) { alwaysCallback(); }
         }
     };
