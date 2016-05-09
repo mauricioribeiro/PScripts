@@ -25,4 +25,3 @@ fustimulatorApp.filter("getJogoTexto", function(){
         return 'Empate';
     }
 });
-

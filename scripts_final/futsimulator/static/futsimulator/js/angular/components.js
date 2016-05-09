@@ -9,23 +9,45 @@ futsimulatorComponents.directive('futsimulatorForm', function () {
         scope: { clubeSalvo: '&' },
 
         controller: function ($scope, futsimulatorAPI) {
+            var csrfCookie = futsimulatorAPI.getCookie("csrftoken");
+
             $scope.formFlag = false;
             $scope.loaderFlag = false;
-            $scope.clube = {};
             $scope.erros = {};
+            $scope.clube = {
+                string_id: '',
+                nome: '',
+                escudo: '',
+                elenco: '',
+                tradicao: '',
+                antepenultimo_jogo: '',
+                penultimo_jogo: '',
+                ultimo_jogo: '',
+            };
 
             $scope.salvar = function () {
                 $scope.loaderFlag = true;
                 $scope.erros = {};
-                futsimulatorAPI.salvar($scope.clube, function (clubeDoServidor) {
 
-                    $scope.clube = {nome: '', codigo: ''};
+                console.log($scope.clube);
 
+                futsimulatorAPI.salvar($scope.clube, csrfCookie, function (clubeDoServidor) {
                     if ($scope.clubeSalvo !== undefined) {
                         $scope.clubeSalvo({clube: clubeDoServidor});
                     }
-                }, function (erros) {
-                    $scope.erros = erros;
+                }, function (resultadoErro) {
+                    
+                    var clubeErro = resultadoErro.config.data;
+
+                    if(!clubeErro.string_id){ $scope.erros.string_id = 'Campo Obrigatório' ; }
+                    if(!clubeErro.nome){ $scope.erros.nome = 'Campo Obrigatório' ; }
+                    if(!clubeErro.escudo){ $scope.erros.escudo = 'Campo Obrigatório' ; }
+                    if(!clubeErro.elenco){ $scope.erros.elenco = 'Campo Obrigatório' ; }
+                    if(!clubeErro.tradicao){ $scope.erros.tradicao = 'Campo Obrigatório' ; }
+                    if(!clubeErro.antepenultimo_jogo){ $scope.erros.antepenultimo_jogo = 'Campo Obrigatório' ; }
+                    if(!clubeErro.penultimo_jogo){ $scope.erros.penultimo_jogo = 'Campo Obrigatório' ; }
+                    if(!clubeErro.ultimo_jogo){ $scope.erros.ultimo_jogo = 'Campo Obrigatório' ; }
+
                 }, function () {
                     $scope.loaderFlag = false;
                 });
@@ -51,10 +73,14 @@ futsimulatorComponents.directive('futsimulatorItem', function () {
         },
 
         controller: function ($scope, futsimulatorAPI) {
+            
+            var csrfCookie = futsimulatorAPI.getCookie("csrftoken");
+
             $scope.visivel = true;
             $scope.apagar = function () {
                 $scope.visivel = false;
-                futsimulatorAPI.apagar($scope.clube.id, function () {
+
+                futsimulatorAPI.apagar($scope.clube.id, csrfCookie, function () {
                     if($scope.clubeApagado!==undefined){
                         $scope.clubeApagado();
                     }
