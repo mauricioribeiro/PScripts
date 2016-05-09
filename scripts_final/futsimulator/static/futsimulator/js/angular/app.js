@@ -17,3 +17,12 @@ fustimulatorApp.controller('futsimulatorCtrl',function ($scope, futsimulatorAPI)
         $scope.clubes.splice(i,1);
     }
 });
+
+fustimulatorApp.filter("getJogoTexto", function(){
+    return function (jogo){
+        if(jogo < 0){ return 'Derrota'; }
+        if(jogo > 0){ return 'Vitória'; }
+        return 'Empate';
+    }
+});
+
