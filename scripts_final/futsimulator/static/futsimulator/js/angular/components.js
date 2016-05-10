@@ -10,29 +10,24 @@ futsimulatorComponents.directive('futsimulatorForm', function () {
 
         controller: function ($scope, futsimulatorAPI) {
             var csrfCookie = futsimulatorAPI.getCookie("csrftoken");
+            var clubeVazio = {string_id: '', nome: '', escudo: '', elenco: '', tradicao: '', antepenultimo_jogo: '', penultimo_jogo: '', ultimo_jogo: ''}
 
             $scope.formFlag = false;
             $scope.loaderFlag = false;
             $scope.erros = {};
-            $scope.clube = {
-                string_id: '',
-                nome: '',
-                escudo: '',
-                elenco: '',
-                tradicao: '',
-                antepenultimo_jogo: '',
-                penultimo_jogo: '',
-                ultimo_jogo: '',
-            };
+            $scope.clube = {};
 
             $scope.salvar = function () {
                 $scope.loaderFlag = true;
                 $scope.erros = {};
 
                 futsimulatorAPI.salvar($scope.clube, csrfCookie, function (clubeDoServidor) {
+
+                    $scope.clube = clubeVazio;
                     if ($scope.clubeSalvo !== undefined) {
                         $scope.clubeSalvo({clube: clubeDoServidor});
                     }
+
                 }, function (resultadoErro) {
                     
                     var clubeErro = resultadoErro.config.data;

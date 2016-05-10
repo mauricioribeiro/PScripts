@@ -35,7 +35,6 @@ def gerenciar_angular(request):
 @csrf_protect
 def api_cadastrar(request):
 	if request.method == 'POST':
-		print('\n',request.POST,'\n')
 		try:
 			if 'id' in request.POST and request.POST['id']:
 				try:

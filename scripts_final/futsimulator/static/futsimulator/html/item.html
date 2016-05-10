@@ -10,7 +10,7 @@
         <th>Ação</th>
     -->
     <td>{{ clube.id }}</td>
-    <td><img src="{{ clube.escudo }}" title="{{ clube.nome }}"  class="time-logo"></td>
+    <td><img src="{{ clube.escudo }}" title="{{ clube.nome }}" ng-show="{{clube.escudo !== undefined}}" class="time-logo"></td>
     <td>{{ clube.nome }}</td>
     <td>{{ clube.antepenultimo_jogo | getJogoTexto }}</td>
     <td>{{ clube.penultimo_jogo | getJogoTexto }}</td>

@@ -9,11 +9,11 @@ fustimulatorApp.controller('futsimulatorCtrl',function ($scope, futsimulatorAPI)
         $scope.clubes = clubeDoServidor;
     });
 
-    $scope.adicionarCategoria = function (clubeSalvo) {
+    $scope.adicionarClube = function (clubeSalvo) {
         $scope.clubes.unshift(clubeSalvo);
     };
 
-    $scope.removerCategoria = function (i) {
+    $scope.removerClube = function (i) {
         $scope.clubes.splice(i,1);
     }
 });
