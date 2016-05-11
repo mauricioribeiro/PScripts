@@ -30,7 +30,7 @@ futsimulatorServices.factory('futsimulatorAPI', function ($http) {
                     'X-CSRFToken': csrfToken,
                 },
             }).then(function(resultado){
-                var clubeResultado = resultado.config.data;
+                var clubeResultado = resultado.data;
                 sucessoCallback(clubeResultado);
             }, erroCallback);
 

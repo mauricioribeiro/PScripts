@@ -23,9 +23,12 @@ futsimulatorComponents.directive('futsimulatorForm', function () {
 
                 futsimulatorAPI.salvar($scope.clube, csrfCookie, function (clubeDoServidor) {
 
+                    console.log(clubeDoServidor);
+
                     $scope.clube = clubeVazio;
                     if ($scope.clubeSalvo !== undefined) {
                         $scope.clubeSalvo({clube: clubeDoServidor});
+                        $scope.clube = clubeDoServidor;
                     }
 
                 }, function (resultadoErro) {
@@ -43,6 +46,7 @@ futsimulatorComponents.directive('futsimulatorForm', function () {
 
                 }, function () {
                     $scope.loaderFlag = false;
+                    $scope.formFlag = false;
                 });
             };
 
