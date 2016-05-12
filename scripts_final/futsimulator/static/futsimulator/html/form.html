@@ -8,7 +8,7 @@
 	<div class="row" ng-show="formFlag">
 		<form id="form-clube" ng-submit="salvar()">
 			<fieldset>
-				<input id="id-input" name="id" type="hidden" value=""></input>
+				<input id="id-input" name="id" type="hidden" value="{{ clube.id }}"></input>
 				<div id="form-group-string_id" class="form-group" ng-class="{'has-error':erros.string_id}">
 					<label class="control-label">Prefixo </label>
 					<input id="string_id-input" type="text" class="campo form-control" name="string_id" value="" ng-model="clube.string_id">

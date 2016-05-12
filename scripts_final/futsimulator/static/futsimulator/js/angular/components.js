@@ -6,6 +6,7 @@ futsimulatorComponents.directive('futsimulatorForm', function () {
         restrict: 'E',
         templateUrl: '/static/futsimulator/html/form.html',
         replace: true,
+        transclude: true,
         scope: { clubeSalvo: '&' },
 
         controller: function ($scope, futsimulatorAPI) {
@@ -22,12 +23,15 @@ futsimulatorComponents.directive('futsimulatorForm', function () {
                 $scope.erros = {};
 
                 futsimulatorAPI.salvar($scope.clube, csrfCookie, function (clubeDoServidor) {
-
-                    console.log(clubeDoServidor);
+                    var editado = ($scope.clube.id);
 
                     $scope.clube = clubeVazio;
                     if ($scope.clubeSalvo !== undefined) {
-                        $scope.clubeSalvo({clube: clubeDoServidor});
+                        if(!editado){
+                            $scope.clubeSalvo({clube: clubeDoServidor});
+                        } else {
+                            $scope.clubeEditado({clube: clubeDoServidor});
+                        }
                         $scope.clube = clubeDoServidor;
                     }
 
@@ -64,16 +68,20 @@ futsimulatorComponents.directive('futsimulatorItem', function () {
         restrict: 'A',
         templateUrl: '/static/futsimulator/html/item.html',
         replace: true,
+        transclude: true,
         scope: {
             clube: '=',
-            clubeApagado:'&'
+            clubeApagado:'&',
         },
 
         controller: function ($scope, futsimulatorAPI) {
             
             var csrfCookie = futsimulatorAPI.getCookie("csrftoken");
+            var clubeVazio = {string_id: '', nome: '', escudo: '', elenco: '', tradicao: '', antepenultimo_jogo: '', penultimo_jogo: '', ultimo_jogo: ''}
 
             $scope.visivel = true;
+            $scope.editando = false;
+
             $scope.apagar = function () {
                 $scope.visivel = false;
 
@@ -86,9 +94,14 @@ futsimulatorComponents.directive('futsimulatorItem', function () {
                     alert('Não foi possível apagar no momento, tente novamente mais tarde');
                     $scope.visivel = true;
                 });
-
             }
 
+            $scope.editar = function () {
+                $scope.$parent.$parent.$$childHead.formFlag = true;
+                $scope.$parent.$parent.$$childHead.erros = {};
+                $scope.$parent.$parent.$$childHead.clube = $scope.clube;
+                $scope.editando = true;
+            }
         }
     };
 });
